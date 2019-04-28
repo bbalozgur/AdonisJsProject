@@ -1,0 +1,66 @@
+@layout('main')
+@section('content')
+
+    <div class="row">
+        <div class="col-md-6">
+            @each(user in users)
+            @if($loop.index<10)
+                <div class="albumTitle" onclick="albumListShow(this)" data-id={{user.id}}>
+                    {{user.title}}
+                </div>
+            @endif
+            @endeach
+         </div>
+         <div id="images" class="col-md-6">
+
+            </div>
+    </div>
+
+
+
+
+<div class="row">
+ <img id="bigImage" src="" alt="">
+</div>
+@endsection
+
+@section('script-area')
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.open("GET", "https://jsonplaceholder.typicode.com/albums/ALBUM_ID/photos", false);
+xhttp.send();
+let albumList = JSON.parse(xhttp.responseText);
+function albumListShow(albumNode) {
+    var albums = new Array();
+    for(var i = 0; i<albumList.length; i++){
+        var album = albumList[i];
+        if(album.albumId == albumNode.dataset.id){
+            albums.push(album);
+        }
+    }
+    var albumDiv = document.getElementById("images");
+    albumDiv.innerHTML = "";
+    var imgCount;
+    if(  window.matchMedia("(max-width: 957px)").matches ) {
+        imgCount = 4;
+    }
+    else{
+        imgCount = 8;
+    }
+    for(var x = 0; x<imgCount; x++){
+        var album = albums[x];
+        var imageTag = document.createElement("img");
+        imageTag.classList.add("albumImages");
+        imageTag.setAttribute("onclick","showImage(this)");
+        imageTag.setAttribute("src",album.url);
+        albumDiv.appendChild(imageTag);
+    }                              
+}
+
+function showImage(image){
+    var bigImage = document.getElementById("bigImage");
+    var imageUrl = image.getAttribute("src");
+    bigImage.setAttribute("src",imageUrl);
+}
+</script>
+@endsection

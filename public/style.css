@@ -1,0 +1,3 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300");html,body{height:100%;width:100%}body{font-family:'Montserrat', sans-serif;font-weight:300}*{margin:0;padding:0}.albumImages{width:25%;padding:10px;cursor:pointer;border:1px solid transparent}.albumImages:hover{border:1px solid black}#bigImage{width:100%;height:100%}.albumTitle{font-weight:700;cursor:pointer}.albumTitle:hover{text-decoration:underline}
+
+/*# sourceMappingURL=style.css.map */
